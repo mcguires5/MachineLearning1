@@ -1,7 +1,6 @@
 % Max_Fail Parameter to show differences in cuttof fialur amout
 % Train BR is the train basian
 
-
 data1 = mvnrnd([3 4],[1,.8;.8,1],1000);
 data2 = mvnrnd([3 7],[1,.8;.8,1],1000);
 labels = [ones(length(data1),1);2*ones(length(data2),1)];

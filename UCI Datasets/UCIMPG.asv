@@ -1,0 +1,11 @@
+T = readtable('mpg.dat');
+T = rmmissing(T);
+raw = table2cell(T(:,2:8));
+Labels = table2array(T(:,1));
+
+net = feedforwardnet(10);
+net.trainParam.showWindow = 1;
+net = train(net, raw',Labels');
+pre = net(raw');
+plotconfusion(Labels', pre, 'Classifications and Missclassifications');
+

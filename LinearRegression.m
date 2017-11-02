@@ -20,8 +20,8 @@ for i = 1:itterations
     in2=0;
 
     for p = 1:n
-        %Hypothesis theta(1,1) is the intercept theta (2,1) is the
-        %coefficent of x
+        %Hypothesis-theta(1,1) is the intercept
+        %(2,1) is the coefficent of x
         h(p) = theta(1,1)+ theta(2,1)*x(p,2); 
         %Add Hypothesis for y
         in1 = in1+(h(p)-y(p));

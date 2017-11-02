@@ -9,13 +9,13 @@ plot(X(:,1),X(:,2),'.');
 plot(Y(:,1),Y(:,2),'+');
 title('Training Data');
 hold off
-
+%Theta values
 theta = [0;0;0];
 
-z = [X; Y];;
+z = [X; Y];
 [rowsZ colsZ] = size(z);
-z1 = z(:,1);
-z2 = z(:,2);
+zX = z(:,1);
+zY = z(:,2);
 
 cost = 1;
 
@@ -26,23 +26,23 @@ W1 = [];
 W2 = [];
 count =0;
 costs=[];
+%Change in cost function
 deltacost = 1;
 while abs(deltacost) > 0.001
     cost = 0;
     sum = [0;0;0];
     for i = 1:rowsZ
-
-        x = [1;z1(i);z2(i)];
+        x = [1;zX(i);zY(i)];
         %Hypothesis
         h = (1/(1+exp(-(theta'*x))));
         if(i < 501)
-            %First set of data
+            %First Class
             y = 0;
             %Compute Cost
             cost = cost + (-log(1-h));
             sum = sum + (h-y)*x;
         elseif(i >= 501)
-            %Second set of data
+            %Second Class
             y =1;
             %Compute Cost
             cost = cost + (-log(h));
@@ -58,57 +58,39 @@ while abs(deltacost) > 0.001
     costs = [costs cost];
 end
 disp(theta);
+
 %Count in class 1 and 2
-countw1 = 0;
-countw2 = 0;
+countClass1 = 0;
+countClass2 = 0;
 
-for j = 1:length(z)
-
-    x = [1;z1(j);z2(j)];
+for i = 1:length(z)
+    %Compute Hypothesis at every point in total data set
+    x = [1;zX(i);zY(i)];
     h = (1/(1+exp(-(theta'*x))));
-
+    
+    %Matricies are created for all points expected in class 1 and 2
+    
+    %Hypothesis greater than .5 class 1 incremented
     if (h < 0.5)
-        W1 = [W1;z(j,1) z(j,2)];
-        countw1 = countw1 + 1;
-    elseif( h > 0.5)
-        W2 = [W2;z(j,1) z(j,2)];
-        countw2 = countw2 + 1;
+        W1 = [W1;z(i,1) z(i,2)];
+        countClass1 = countClass1 + 1;
+    %Hypothesis Less than .5 class 2 incremented
+    elseif( h >= 0.5)
+        W2 = [W2;z(i,1) z(i,2)];
+        countClass2 = countClass2 + 1;
     end
 end
-
+%Plot the predicted classes
 figure
+fprintf('Amount in class 1 %d/n', countClass1);
+fprintf('Amount in class 2 %d/n', countClass1);
 hold on
 plot(W1(:,1),W1(:,2),'.'); %plot
 plot(W2(:,1),W2(:,2),'+');
-title('Testing Data');
+title('Test Data');
 hold off
 
-
-B = mnrfit(X,Y); %test matlab on data
+%Matlabs built in logestic regression function
+B = mnrfit(X,Y); 
+disp('Matlabs Built in predicted values ');
 disp(B);
-disp(countw1);
-disp(countw2);
-
-BW1 = [];
-BW2 = [];
-
-for j = 1:length(z)
-
-    x = [1;z1(j);z2(j)];
-    h = (1/(1+exp(-(theta'*x))));
-
-    if (h < 0.5)
-        BW1 = [BW1;z(j,1) z(j,2)];
-        countw1 = countw1 + 1;
-    elseif( h > 0.5)
-        BW2 = [BW2;z(j,1) z(j,2)];
-        countw2 = countw2 + 1;
-    end
-end
-
-figure
-hold on
-plot(BW1(:,1),BW1(:,2),'.'); %plot
-plot(BW2(:,1),BW2(:,2),'+');
-title('MNRfit Testing Data');
-hold off

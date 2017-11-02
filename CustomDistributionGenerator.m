@@ -1,3 +1,6 @@
+clc
+clf
+%MU must add up to 1
 mu=[.01 .04 .05 .3 .1 .1 .2 .2];
 if(sum(mu(:)) ~= 1)
    disp("Probabilities must add to 1"); 

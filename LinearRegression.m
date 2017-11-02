@@ -6,7 +6,7 @@ noise = rand(n,1);
 noise = noise - (.5);
 %use random number between 0 and .05 to base the y values off of
 x = rand(n,1).*05;
-y = 4 + 4*x + noise;
+y = 4 + 8*x + noise;
 %Plot points
 plot(x,y,'.');
 %Add column of 1's to x

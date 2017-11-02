@@ -1,4 +1,4 @@
-T = readtable('C:\U sers\baseb_000\Desktop\ad.csv');
+T = readtable('ad.csv');
 
 net = feedforwardnet(150);
 net.trainParam.showWindow = 1;

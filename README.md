@@ -50,7 +50,7 @@ This script is an implementation of logestic regression where the cost function 
 
 In this script a SVM is implemented using matlabs Quadratic Programing function which takes in the matricies of inputs and creates output weights which are used to plot the middle boundry and the two outter seperation boundries. The original and classified data is then displayed so one can visually observe the accuracy of a 2 dimensional Support Vector Machine.
 
-12. **Fitcsvm (fitSVM.m)** (checkerboar/spiral)
+12. **Fitcsvm (fitSVM.m)**
 
 This script uses matlabs built in function to seperate two spirals of data. In this function the 'RBF' Kernel is used and the value is set to 'auto' as auto finds the optimal kernel size.
 ### UCIDataSets

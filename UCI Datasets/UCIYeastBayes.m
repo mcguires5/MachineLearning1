@@ -1,4 +1,4 @@
-T = readtable('C:\Users\baseb_000\Desktop\Yeast.csv');
+T = readtable('Yeast.csv');
 T.Properties.VariableNames = {'mcg' 'gvh' 'alm' 'mit' 'vac' 'unkown' 'nuc'};
 model = fitcnb(T,T.nuc);
 

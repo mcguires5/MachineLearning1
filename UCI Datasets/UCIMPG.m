@@ -11,6 +11,9 @@ Labels = table2array(T(:,1));
 net = feedforwardnet(10);
 net.trainParam.showWindow = 1;
 net = train(net, raw',Labels');
+pre = net(raw');
+result = pre - Labels';
+
 perf = perform(net,raw',Labels')
 
 

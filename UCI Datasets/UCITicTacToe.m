@@ -1,4 +1,4 @@
-T = readtable('C:\Users\baseb_000\Desktop\TicTacToe.csv');
+T = readtable('TicTacToe.csv');
 T.Properties.VariableNames = {'Pos1' 'Pos2' 'Pos3' 'Pos4' 'Pos5' 'Pos6' 'Pos7' 'Pos8' 'Pos9' 'WinLose'};
 model = fitcnb(T,T.WinLose);
 

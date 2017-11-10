@@ -25,8 +25,8 @@ Class2Points = [];
 count =0;
 costs=[];
 %Change in cost function
-deltacost = 1;
-while abs(deltacost) > 0.05
+ChangeInCost = 1;
+while abs(ChangeInCost) > 0.05
     cost = 0;
     sum = [0;0;0];
     for i = 1:rZ
@@ -49,7 +49,7 @@ while abs(deltacost) > 0.05
     end
     if count > 0
         %Previous cost - cost
-        deltacost = costs(length(costs)) - cost;
+        ChangeInCost = costs(length(costs)) - cost;
     end
     theta = theta - alpha * sum;
     count = count+1;

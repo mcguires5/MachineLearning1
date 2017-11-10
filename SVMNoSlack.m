@@ -21,11 +21,11 @@ TotalY = TotalData(:,2);
 one = zeros(length(set1)+length(set2),1);
 Z = cat(2,one,TotalX,TotalY);
 
-Class1 = 1;
+
 
 %Parameters for quadprog
 H = [1 0 0;0 1 0;0 0 1];
-W = [1 Class1 1];
+W = [1 1 1];
 Y = diag([ones(length(set1),1);-ones(length(set1),1)]);
 b = -ones(length(set1)+length(set2),1);
 A = -Y*Z;

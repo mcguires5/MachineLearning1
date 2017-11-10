@@ -20,7 +20,7 @@ for i = 1:Points*.7
     plot(Trainning3(i,1,1),Trainning3(i,2,1), 'om')
 end
 hold off;
-%All theta v
+%All theta values are returned from calling the gradient
 Theta1 = gradient(Trainning1(:,:),Trainning2(:,:),Trainning3(:,:));
 Theta2 = gradient(Trainning2(:,:),Trainning1(:,:),Trainning3(:,:));
 Theta3 = gradient(Trainning3(:,:),Trainning1(:,:),Trainning2(:,:));
@@ -50,11 +50,12 @@ while abs(deltacost) > CutOff
     for i = 1:length(TotalData)
         X = [1;TotalDataX(i);TotalDataY(i)];
         g = Weights' * X;
-        if(i < l) %if it is less than one then it is class 1
+        if(i < l) %if it is less than one then it is from class 1
             y = 1;
         else %if it is greater than one then it is from a different class
             y = -1;
         end
+        %If classification inccorect update cost and sum
         if(y * g < 0)
             cost = cost - g*y;
             sum = sum - X*y;
@@ -88,10 +89,8 @@ Class2Data = [];
 Class3Data = [];
 
 for i = 1:length(TotalData)
-    x1 = TotalDataX(i);
-    x2 = TotalDataY(i);
-    X = [1;x1;x2];
-    
+    X = [1;TotalDataX(i);TotalDataY(i)];
+    %returns the value predicted for each class
     Class1Value = Theta1'*X;
     Class2Value = Theta2'*X;
     Class3Value = Theta3'*X;

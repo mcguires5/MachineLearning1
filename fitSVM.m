@@ -19,7 +19,7 @@ hold off;
 % 0.008 incorrect
 % 0.005 incorrect
 % 0.001 Way off
-Model = fitcsvm(TrainSet,labels,'standard',true,'kernelFunction','RBF','KernelScale',0.015);
+Model = fitcsvm(TrainSet,labels,'standard',true,'Boxconstraint',1,'kernelFunction','RBF','KernelScale','auto');
 
 [result,score] = predict(Model,TestSet);
 figure

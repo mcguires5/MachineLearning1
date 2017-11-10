@@ -1,4 +1,4 @@
-T = readtable('C:\Users\baseb_000\Desktop\iris.csv');
+T = readtable('iris.csv');
 T.Properties.VariableNames = {'sepal_length' 'sepal_width' 'petal_length' 'petal_width' 'class'};
 model = fitcnb(T,T.class);
 

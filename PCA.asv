@@ -1,0 +1,43 @@
+%PCA from Yale Face Database
+%http://vision.ucsd.edu/content/yale-face-database
+Image = {6,1};
+FinalOutput = {6,1};
+Image{1,1} = im2double(imread('C:\Users\baseb_000\Downloads\yalefaces\yalefaces\subject01.glasses.gif'));
+Image{2,1} = im2double(imread('C:\Users\baseb_000\Downloads\yalefaces\yalefaces\subject02.glasses.gif'));
+Image{3,1} = im2double(imread('C:\Users\baseb_000\Downloads\yalefaces\yalefaces\subject03.glasses.gif'));
+Image{4,1} = im2double(imread('C:\Users\baseb_000\Downloads\yalefaces\yalefaces\subject04.glasses.gif'));
+Image{5,1} = im2double(imread('C:\Users\baseb_000\Downloads\yalefaces\yalefaces\subject05.glasses.gif'));
+Image{6,1} = im2double(imread('C:\Users\baseb_000\Downloads\yalefaces\yalefaces\subject06.glasses.gif'));
+Input = im2double(imread('C:\Users\baseb_000\Downloads\yalefaces\yalefaces\subject02.happy.gif'));
+%Add Noise
+Input = imnoise(Input,'gaussian',0.1);
+ModifiedOriginal = PCAFunction(Input,10);
+for i = 1:6
+    Image{i,1} = imnoise(Image{i,1},'gaussian',0.1);
+    Output{i,1} = PCAFunction(Image{i,1},10);
+end
+minDistance = 100000000;
+bestMatch = 0;
+for i = 1:6
+    distance = sqrt(sum((ModifiedOriginal-Output{i,1}).^2));
+    d = average(distance(:,:))
+    if d < minDistance
+        minDistance = d;
+        bestMatch = i;
+    end
+end
+disp(bestMatch);
+%Performing PCA function
+function p = PCAFunction(Image,k)
+Mean = repmat(mean(Image),length(Image(:,1)),1);
+Norm = Image - Mean;
+Covariance = cov(Norm);
+[V, D] = eig(Covariance,'vector');
+tmp = length(V)-(k-1);
+Output = V(:,tmp:length(V(1,:)));
+ImOut = Image*Output*Output';
+p = ImOut;
+end
+
+
+

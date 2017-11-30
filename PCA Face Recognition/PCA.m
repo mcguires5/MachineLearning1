@@ -34,7 +34,7 @@ bestMatch = 0;
 figure;
 suptitle('Subjects to Select From')
 for i = 1:6
-    subplot(2,3,i), imshow(Image{i,1}), title(strcat('Subject',{' '}, num2str(i)))
+    subplot(2,3,i), imshow(Output{i,1}), title(strcat('Subject',{' '}, num2str(i)))
     distance = sqrt(sum((ModifiedOriginal-Output{i,1}).^2));
     d = average(distance(:,:));
     if d < minDistance
